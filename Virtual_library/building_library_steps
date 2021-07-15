@@ -1,0 +1,16 @@
+-Install postgres database
+https://www.postgresql.org/download
+
+- Load ChEMBL database
+Current version 19
+ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/releases/
+
+- Install RDKit cheminformatics
+http://rdkit.org/docs/
+
+for env:
+conda create -c rdkit -n my-rdkit-env rdkit
+source activate my-rdkit-env 
+
+- Installing the postgres cartridge
+https://code.google.com/archive/p/rdkit/wikis/BuildingtheCartridge.wiki

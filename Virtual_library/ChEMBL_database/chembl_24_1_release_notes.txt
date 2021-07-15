@@ -1,0 +1,431 @@
+
+ChEMBL database version ChEMBL24_1 release notes
+_________________________________________
+
+# This version of the database, prepared on 23/04/2018 contains:
+
+
+    2,275,906 compound records
+    1,828,820 compounds (of which 1,820,035 have mol files)
+    15,207,914 activities
+    1,060,283 assays
+    12,091 targets
+    69,861 documents
+    
+
+BioAssay Data Sources:	Number Assays:	Number Compound Records:	Number Activities:
+
+Scientific Literature	1,041,786	1,278,530	6,043,592
+Patent Bioactivity Data	4,258	26,056	74,050
+BindingDB Database	4,147	137,366	303,295
+TP-search Transporter Database	3,592	4,383	6,765
+PubChem BioAssays	2,999	531,694	7,434,992
+FDA Approval Packages	1,386	80	1,387
+Sanger Institute Genomics of Drug Sensitivity in Cancer	714	139	73,169
+GSK Published Kinase Inhibitor Set	456	1,101	169,451
+Drugs for Neglected Diseases Initiative (DNDi)	233	7,070	14,452
+MMV Malaria Box	138	8,438	45,158
+Curated Drug Pharmacokinetic Data	136	98	1,163
+DrugMatrix	134	1,529	494,046
+MMV Pathogen Box	84	1,174	4,657
+K4DD Project	48	273	2,064
+Open Source Malaria Screening	22	211	344
+CO-ADD antimicrobial screening data	22	20	180
+St Jude Malaria Screening	16	1,524	5,456
+WHO-TDR Malaria Screening	16	740	5,853
+AstraZeneca Deposited Data	15	5,799	11,687
+GSK Tuberculosis Screening	15	826	1,814
+Deposited Supplementary Bioactivity Data	13	1,786	4,817
+GSK Kinetoplastid Screening	13	592	7,235
+Curated Drug Metabolism Pathways	11	867	11
+St Jude Leishmania Screening	6	13,643	42,105
+GSK Malaria Screening	6	13,533	81,198
+Novartis Malaria Screening	6	10,119	27,888
+Gates Library compound collection	4	206,099	139,775
+Harvard Malaria Screening	4	37	111
+Open TG-GATEs	2	160	210,708
+Published Kinase Inhibitor Set 2	1	486	491
+
+
+Compound-Only Data Sources:	Number Compound Records:
+
+USP Dictionary of USAN and International Drug Names	11,382
+WHO Anatomical Therapeutic Chemical Classification	3,133
+Orange Book	2,067
+British National Formulary	1,895
+Clinical Candidates	1,797
+Gene Expression Atlas Compounds	793
+Withdrawn Drugs	192
+Manually Added Drugs	168
+HeCaToS Compounds	96
+External Project Compounds	10
+
+
+
+############################################
+# Data fixes since ChEMBL_24:
+############################################
+
+Updated ChEMBL_24 to correct a standardisation error, which resulted in a number of anti-logged measurements types having incorrect standard_type and standard_units assigned in the activities table.
+
+############################################
+# Data changes since ChEMBL_23:
+############################################
+
+# Deposited Data Sets:
+
+K4DD Project - K4DD drug target binding kinetics data (src_id = 30, DOI = 10.6019/CHEMBL3885741)
+The K4DD (Kinetics for Drug Discovery) project (started in 2012) is supported by the Innovative Medicines Initiative Joint Undertaking (IMI JU), resources of which are composed of a financial contribution from the European Union's Seventh Framework Programme (FP7/2007-2013) and EFPIA companies' in kind contribution. Its goal is to enable the adoption of drug-target binding kinetics analysis in the drug discovery decision-making process, and thereby contribute to the development of a new generation of improved medicinal products. This data set contains drug-target binding kinetics measured for several hundred compounds using different methods such as SPR, radioligand binding and KPCA and is is provided as an open resource for future research.
+
+MMV Pathogen Box - The Australian National University Dept Of Immunology (src_id = 34, DOI = 10.6019/CHEMBL3987221)
+400 compounds from the Pathogen box were screened for inhibitory active of 2 NTD relevant human targets Ferrochelatase and  Porphobilinogen deaminase.  Chemical structures and associated data are hereby made public to encourage additional drug lead identification efforts and further research into this disease.
+
+Published Kinase Inhibitor Set 2 - Northwick Park Institute for Medical Research (src_id = 43)(10.6019/CHEMBL3988181)
+The GKS PKIS2 collection of 490 compounds were tested against Onchocerca lienalis microfilariae in a 96-well format. The assay is described in Townson et al. (2007) Challenges in drug discovery for novel antifilarials, Expert Opinion on Drug Discovery, 2, S63-S73
+
+University of Dundee, Gates Library - Leishmania donovani Methionine tRNA synthetase screening (src_id = 33, DOI = 10.6019/CHEMBL3988442)
+
+
+# Change in data deposition model:
+
+A new data submission format and database loader has been implemented. This includes the addition of depositor-supplied IDs to the DOCS (RIDX), COMPOUND_RECORDS (CIDX) and ASSAYS (AIDX) tables, and SRC_ID information to the DOCS and ACTIVITIES table. The new deposition system allows more advanced functionality including the ability to update previously deposited data sets, and the ability to deposit activity data against existing ChEMBL compound or assay collections. This means that in future releases, it will be possible for the SRC_ID for data in the ACTIVITIES table to be different from the SRC_ID in the COMPOUND_RECORDS and/or ASSAYS tables to which the measurements relate. This has not previously been the case. For data depositors, we will release more information about the new submission format soon and hope to provide a submission portal in the future. If you wish to submit data to ChEMBL, please contact us and we will provide more details.
+
+
+# Withdrawn Class information
+
+Withdrawn drugs in ChEMBL (src_id = 36) have been annotated with a controlled vocabulary to describe the reasons for their withdrawal. This WITHDRAWN_CLASS field has been added to the MOLECULE_DICTIONARY table, molecule web service and the Compound Report Card and Browse Drugs views in the ChEMBL interface, and complements the existing (free text) WITHDRAWN_REASON field. Some drugs may have more than one term in WITHDRAWN_CLASS (represented as a semi-colon separated list). 
+
+Current classes are:
+Carcinogenicity
+Cardiotoxicity
+Dermatological toxicity
+Gastrotoxicity
+Hematological toxicity
+Hepatotoxicity
+Immune system toxicity
+Metabolism toxicity
+Misuse
+Musculoskeletal toxicity
+Nephrotoxicity
+Neurotoxicity
+Opthalmic toxicity
+Psychiatric toxicity
+Respiratory toxicity
+Teratogenicity
+Vascular toxicity
+
+
+# Activity properties, supplementary data and reformatting of DrugMatrix, Open TG-GATEs and Drug Pharmacokinetic Data sets
+
+Previously in ChEMBL parameters such as compound doses or time points could not be recorded against individual activity measurements (only the whole assay) and such experiments were typically split so that a separate assay was created for each compound or time point measured. We have now added an ACTIVITY_PROPERTIES table to the database, to allow such parameters to be captured for individual activity measurements. The table can also be used to record key experimental measurements that are important in interpreting the values reported in the ACTIVITIES table (e.g., HILL_SLOPE for a dose-response curve). Measured result types can be distinguished from experimental parameters by setting the RESULT_FLAG field = 1. Information from the ACTIVITY_PROPERTIES table can now be viewed on the Bioactivity Summary view in ChEMBL, by selecting the additional columns (see 'Interface changes' below).
+
+The ACTIVITY_SUPP table has also been introduced to allow supplementary data for an activity measurement to be captured. For example, for in vivo toxicology data, the ACTIVITIES table may capture summary level data across a group of animals, while the ACTIVITY_SUPP table contains individual animal-level data. Similarly, where an IC50 measurement is recorded in the ACTIVITIES table, the individual % inhibition measurements (points on the curve) could be captured in ACTIVITY_SUPP. In general, such data should only be included in ChEMBL where there is a compelling need to do so (e.g., it contributes to interpreting the summary-level data), since the aim of ChEMBL is not to store raw screening data.
+
+The existing ASSAY_PARAMETERS table has also been reformatted to allow better storage of numeric parameters (e.g., associating values and their units) and data standardisation. The ACTIVITIES, ASSAY_PARAMETERS, ACTIVITY_PROPERTIES and ACTIVITY_SUPP tables now all follow the same general format, with a set of TYPE/RELATION/VALUE/UNITS/TEXT_VALUE columns and equivalent STANDARD_TYPE/STANDARD_RELATION/STANDARD_VALUE/STANDARD_UNITS/STANDARD_TEXT_VALUE columns, storing the standardised version of the measurements. 
+
+Due to the inclusion of the new ACTIVITY_PROPERTIES and ACTIVITY_SUPP tables in ChEMBL, a number of datasets (Open TG-GATEs, DrugMatrix in vivo data and Curated Drug Pharmacokinetic Data) have now been collapsed to a much smaller number of assays (see below). Experimental variables that were previously included in assay descriptions and as ASSAY_PARAMETERS have, in many cases, been moved to the ACTIVITY_PROPERTIES table. For Open TG-GATEs and DrugMatrix in vivo data sets, additional information has also been captured in the ACTIVITY_SUPP table. Please note, DrugMatrix in vitro pharmacology data (Document CHEMBL1909046) is unaffected by these changes.
+
+
+* Open TG-GATEs (src_id = 11)
+Previous Documents:
+CHEMBL2766013	Open TG-GATES in vivo data: Pathology
+CHEMBL2766014	Open TG-GATES in vivo data: Hematology
+CHEMBL2766011	Open TG-GATES in vivo data: Biochemistry
+CHEMBL2766012	Open TG-GATES in vivo data: Organ Weight
+
+New Document:
+CHEMBL3885861	Open TG-GATES
+
+Previous Assays:
+CHEMBL2766017 to CHEMBL2924215
+
+New Assays:
+CHEMBL3885863	Open TG-GATES - Regimen: Single
+CHEMBL3885862	Open TG-GATES - Regimen: Daily Repeat
+
+
+* DrugMatrix (src_id = 15)
+Previous Documents:
+CHEMBL2924216	DrugMatrix in vivo data: Biochemistry
+CHEMBL2924217	DrugMatrix in vivo data: Hematology
+CHEMBL2924218	DrugMatrix in vivo data: Pathology
+
+New Document:
+CHEMBL3885881	DrugMatrix
+
+Previous Assays:
+CHEMBL2924226 to CHEMBL3037771
+
+Assays:
+CHEMBL3885883	DrugMatrix - Regimen: Single
+CHEMBL3885882	DrugMatrix - Regimen: Daily Repeat
+
+
+* Curated Drug Pharmacokinetic Data (src_id = 39)
+Documents unchanged
+
+Previous Assays:
+CHEMBL3832089 to CHEMBL3832538
+CHEMBL3832556 to CHEMBL3832626
+
+New Assays:
+CHEMBL3889321 to CHEMBL3889456
+
+
+# Removal of Tox21 assays from PubChem BioAssay set:
+
+Assays in the PubChem BioAssay subset of ChEMBL (src_id = 7) that derive from Tox21 have been removed. This is because coverage of these assays in ChEMBL was incomplete. We are planning to replace this data with the full Tox21 data set in the near future.
+
+
+# Change of InChI version
+
+The version of Standard InChI used in ChEMBL has been upgraded from 1.02b to 1.05. As a result a small number of Standard InChIs for compounds have changed. Please note, CHEMBL_IDs and molfiles have not been altered for these compounds, only the STANDARD_INCHI and STANDARD_INCHI_KEY fields in the COMPOUND_STRUCTURES table.
+
+CHEMBL_ID	OLD_STANDARD_INCHI_KEY  	NEW_STANDARD_INCHI_KEY
+CHEMBL31818	MEKFLMWGHHSADC-NZFNHWASSA-N	PBDYZVRPUSRBCR-NZFNHWASSA-N
+CHEMBL285401	AVLXMXWMJFRHTP-NZFNHWASSA-N	SOAIQMUEYYSJNA-NZFNHWASSA-N
+CHEMBL286807	MEKFLMWGHHSADC-KWKYVRJSSA-N	PBDYZVRPUSRBCR-KWKYVRJSSA-N
+CHEMBL1808864	WRYOOSDWZZCYJI-UHFFFAOYSA-N	LSYWPWDUCGCHKU-UHFFFAOYSA-N
+CHEMBL1808865	SGKTUADUEOMFIX-UHFFFAOYSA-N	UIUVMGPXEMICLV-UHFFFAOYSA-N
+CHEMBL3230833	GMIMCCCHFXLMNN-XLKFXECMSA-N	PROPPBUGOOTKQN-XLKFXECMSA-N
+CHEMBL3230834	ZWOLGCPAHFCIIF-GLEZIHRCSA-N	HLKXTLYXRRTOJR-GLEZIHRCSA-N
+CHEMBL3230835	ZWOLGCPAHFCIIF-AYVTZFPOSA-N	HLKXTLYXRRTOJR-AYVTZFPOSA-N
+CHEMBL3230830	SSUAQSISABFWNX-MLXNANBUSA-N	FANXZPANFQUGNC-MLXNANBUSA-N
+CHEMBL3230843	UCZVVKWULMXMIA-AYVTZFPOSA-N	FKEBIELXSBGYPQ-AYVTZFPOSA-N
+CHEMBL3230844	KSXSKUKKWFDODA-AYVTZFPOSA-N	WVOVAJAOADLLIN-AYVTZFPOSA-N
+CHEMBL3230845	KSXSKUKKWFDODA-GLEZIHRCSA-N	WVOVAJAOADLLIN-GLEZIHRCSA-N
+CHEMBL3246663	PXYOKOHPQIXVDZ-VNVNHPFBSA-N	JSOUEVCQXUZFKY-VNVNHPFBSA-N
+CHEMBL3246664	XGVHDPAXIRSNGL-KCFRUSQFSA-N	NGSPKIQIWBFOLF-KCFRUSQFSA-N
+CHEMBL31565	AVLXMXWMJFRHTP-KWKYVRJSSA-N	SOAIQMUEYYSJNA-KWKYVRJSSA-N
+CHEMBL3230842	UCZVVKWULMXMIA-GLEZIHRCSA-N	FKEBIELXSBGYPQ-GLEZIHRCSA-N
+
+
+# Compound Properties now calculated with RDKit
+
+We are now using RDKit to calculate the following fields in the COMPOUND_PROPERTIES table:
+
+MW_FREEBASE
+ALOGP
+HBA
+HBD
+PSA
+RTB
+QED_WEIGHTED
+FULL_MWT
+AROMATIC_RINGS
+HEAVY_ATOMS
+MW_MONOISOTOPIC
+FULL_MOLFORMULA
+HBA_LIPINSKI
+HBD_LIPINSKI
+
+The following derived properties are therefore also based on RDKit-calculated properties:
+
+RO3_PASS
+NUM_RO5_VIOLATIONS
+NUM_LIPINSKI_RO5_VIOLATIONS
+
+The above properties have all been recalculated for existing compounds. As a result, some properties will have changed from those in previous releases. The following properties are still calculated with ACDLabs software as before:
+
+ACD_MOST_APKA
+ACD_MOST_BPKA
+ACD_LOGP
+ACD_LOGD
+MOLECULAR_SPECIES
+
+
+# Updated Data Sets:
+
+# Scientific Literature (src_id = 1)
+# Clinical Candidates (src_id = 8)
+# FDA Orange Book (src_id = 9)
+# Open TG-GATEs (src_id = 11)
+# Manually Added Drugs (src_id = 12)
+# USP Dictionary of USAN and International Drug Names (src_id = 13)
+# DrugMatrix (src_id = 15)
+# BindingDB (src_id = 37)
+# Patent Bioactivity Data (src_id = 38)
+# Curated Drug Pharmacokinetic Data (src_id = 39)
+# WHO Anatomical Therapeutic Chemical Classification (src_id = 41)
+
+
+############################################
+# Database changes since the last release:
+############################################
+
+New tables have been added to the schema to allow better capture of complex data sets (e.g., toxicology assays). A small number of changes have also been made to existing tables. Please see our recent blog post for more details of these changes: http://chembl.blogspot.co.uk/2018/04/schema-changes-coming-in-chembl24.html
+
+# Columns Added:
+
+ACTIVITIES:
+TOID	NUMBER		The Test Occasion Identifier, used to group together related activity measurements
+SRC_ID	NUMBER(3,0)		Foreign key to source table, indicating the source of the activity value
+TYPE	VARCHAR2(250)	NOT NULL	Type of end-point measurement: e.g. IC50, LD50, %inhibition etc, as it appears in the original dataset (REPLACES PUBLISHED_TYPE)
+RELATION	VARCHAR2(50)		Symbol constraining the activity value (e.g. >, <, =), as it appears in the original dataset (REPLACES PUBLISHED_RELATION)
+VALUE	NUMBER		Datapoint value as it appears in the original dataset (REPLACES PUBLISHED_VALUE)
+UNITS	VARCHAR2(100)		Units of measurement as they appear in the original dataset (REPLACES PUBLISHED_UNITS)
+TEXT_VALUE	VARCHAR2(1000)		Non-numeric value for measurement as in original dataset
+STANDARD_TEXT_VALUE	VARCHAR2(1000)		Standardized version of non-numeric measurement
+UPPER_VALUE	NUMBER		Where the activity is a range, this represents the highest value of the range (numerically), while the VALUE column represents the lower value
+STANDARD_UPPER_VALUE	NUMBER		Where the activity is a range, this represents the standardised version of the highest value of the range (with the lower value represented by STANDARD_VALUE)
+
+ASSAYS:
+AIDX	VARCHAR2(200)	NOT NULL	The Depositor Defined Assay Identifier
+
+ASSAY_PARAMETERS:
+TYPE	VARCHAR2(250)	NOT NULL	The type of parameter being described, according to the original data source
+RELATION	VARCHAR2(50)		The relation symbol for the parameter being described, according to the original data source
+VALUE	NUMBER		The value of the parameter being described, according to the original data source. Used for numeric data
+UNITS	VARCHAR2(100)		The units for the parameter being described, according to the original data source
+TEXT_VALUE	VARCHAR2(1000)		The text value of the parameter being described, according to the original data source. Used for non-numeric/qualitative data
+STANDARD_TYPE	VARCHAR2(250)		Standardized form of the TYPE
+STANDARD_RELATION	VARCHAR2(50)		Standardized form of the RELATION
+STANDARD_VALUE	NUMBER		Standardized form of the VALUE
+STANDARD_UNITS	VARCHAR2(100)		Standardized form of the UNITS
+STANDARD_TEXT_VALUE	VARCHAR2(1000)		Standardized form of the TEXT_VALUE
+COMMENTS	VARCHAR2(4000)		Additional comments describing the parameter
+
+COMPOUND_RECORDS:
+CIDX	VARCHAR2(200)	NOT NULL	The Depositor Defined Compound Identifier.
+
+DOCS:
+RIDX	VARCHAR2(200)	NOT NULL	The Depositor Defined Reference Identifier
+SRC_ID	NUMBER	NOT NULL	Foreign key to Source table, indicating the source of this document
+
+MOLECULE_DICTIONARY:
+WITHDRAWN_CLASS	VARCHAR2(500)		High level categories for the withdrawn reason (e.g., Cardiotoxicity, Hepatotoxicity)
+
+PRODUCT_PATENTS:
+SUBMISSION_DATE	DATE		The date on which the FDA receives patent information from the new drug application (NDA) holder. Format is Mmm d, yyyy
+
+
+# Columns Removed:
+
+ACTIVITIES:
+PUBLISHED_TYPE (DEPRECATED, will be removed in ChEMBL_25)
+PUBLISHED_RELATION (DEPRECATED, will be removed in ChEMBL_25)
+PUBLISHED_VALUE (DEPRECATED, will be removed in ChEMBL_25)
+PUBLISHED_UNITS (DEPRECATED, will be removed in ChEMBL_25)
+
+ASSAY_PARAMETERS:
+PARAMETER_TYPE
+PARAMETER_VALUE
+
+COMPOUND_PROPERTIES:
+NUM_ALERTS
+
+
+# Tables Added:
+
+ACTIVITY_PROPERTIES:
+Table storing parameters and properties of Activity_IDs in the ACTIVITIES table - can be either independent variables that do not apply to the whole assay (e.g., compounds 'DOSE'), or dependent variables/results that are important in interpreting the activity values (e.g., 'HILL_SLOPE')
+
+KEYS	COLUMN_NAME	DATA_TYPE	NULLABLE	COMMENT
+PK	AP_ID	NUMBER(11,0)	NOT NULL	Unique ID for each record.
+FK,UK	ACTIVITY_ID	NUMBER(11,0)	NOT NULL	FK to ACTIVITY_ID in ACTIVITIES table.
+UK	TYPE	VARCHAR2(250)	NOT NULL	The parameter or property type
+	RELATION	VARCHAR2(50)		Symbol constraining the value (e.g. >, <, =)
+	VALUE	NUMBER		Numberical value for the parameter or property
+	UNITS	VARCHAR2(100)		Units of measurement
+	TEXT_VALUE	VARCHAR2(1000)		Non-numerical value of the parameter or property
+	STANDARD_TYPE	VARCHAR2(250)		Standardised form of the TYPE
+	STANDARD_RELATION	VARCHAR2(50)		Standardised form of the RELATION
+	STANDARD_VALUE	NUMBER		Standardised form of the VALUE
+	STANDARD_UNITS	VARCHAR2(100)		Standardised form of the UNITS
+	STANDARD_TEXT_VALUE	VARCHAR2(1000)		Standardised form of the TEXT_VALUE
+	COMMENTS	VARCHAR2(4000)		A Comment.
+	RESULT_FLAG	NUMBER(1,0)	NOT NULL	A flag to indicate, if set to 1, that this type is a dependent variable/result (e.g., slope) rather than an independent variable/parameter (0, the default).
+
+
+ACTIVITY_SMID:
+A join table between ACTIVITY_SUPP_MAP and ACTIVITY_SUPP
+
+KEYS	COLUMN_NAME	DATA_TYPE	NULLABLE	COMMENT
+PK	SMID	NUMBER(11,0)	NOT NULL	FK to SMID in ACTIVITY_SUPP_MAP, and a FK to SMID in ACTIVITY_SUPP
+
+
+ACTIVITY_SUPP:
+Supplementary / Supporting Data for ACTIVITIES - can be linked via ACTIVITY_SMID and ACTIVITY_SUPP_MAP tables
+
+KEYS	COLUMN_NAME	DATA_TYPE	NULLABLE	COMMENT
+PK	AS_ID	NUMBER(11,0)	NOT NULL	Unique ID for each record.
+UK	RGID	NUMBER(11,0)	NOT NULL	Record Grouping ID, used to group together related data points in this table
+FK	SMID	NUMBER(11,0)		FK to SMID in ACTIVITY_SMID.
+UK	TYPE	VARCHAR2(250)	NOT NULL	Type of end-point measurement: e.g. IC50, LD50, %inhibition etc, as it appears in the original dataset
+	RELATION	VARCHAR2(50)		Symbol constraining the activity value (e.g. >, <, =), as it appears in the original dataset
+	VALUE	NUMBER		Datapoint value as it appears in the original dataset.
+	UNITS	VARCHAR2(100)		Units of measurement as they appear in the original dataset
+	TEXT_VALUE	VARCHAR2(1000)		Non-numeric value for measurement as in original dataset
+	STANDARD_TYPE	VARCHAR2(250)		Standardised form of the TYPE
+	STANDARD_RELATION	VARCHAR2(50)		Standardised form of the RELATION
+	STANDARD_VALUE	NUMBER		Standardised form of the VALUE
+	STANDARD_UNITS	VARCHAR2(100)		Standardised form of the UNITS
+	STANDARD_TEXT_VALUE	VARCHAR2(1000)		Standardised form of the TEXT_VALUE
+	COMMENTS	VARCHAR2(4000)		A Comment.
+
+
+ACTIVITY_SUPP_MAP:
+Mapping table, linking supplementary / supporting data from the ACTIVITY_SUPP table to the main ACTIVITIES table
+
+KEYS	COLUMN_NAME	DATA_TYPE	NULLABLE	COMMENT
+PK,FK	ACTIVITY_ID	NUMBER(38,0)	NOT NULL	FK to ACTIVITY_ID in ACTIVITIES table.
+PK,FK	SMID	NUMBER(38,0)	NOT NULL	FK to SMID in ACTIVITY_SMID.
+
+
+# Tables Removed:
+
+PARAMETER_TYPE
+Due to changes to the ASSAY_PARAMETERS table, this table has now been removed. Parameter types will be defined in the ACTIVITY_STDS_LOOKUP table in future.
+
+
+################################################
+# Interface changes since the last release:
+################################################
+
+Withdrawn class information has been added to Compound Report Cards for withdrawn drugs and is also available as an additional column on the 'Browse Drugs' view (displayed using the 'Show/hide columns' button on the top right)
+e.g., https://www.ebi.ac.uk/chembl/compound/inspect/CHEMBL121
+
+Assay parameters section on Assay Report Card has been changed to reflect the new format of this table
+e.g., https://www.ebi.ac.uk/chembl/assay/inspect/CHEMBL3885862
+
+Bioactivity summary view has been updated to allow viewing of Activity Properties (both experimental parameters and result types). These can be displayed by clicking the 'Show/hide columns' button at the top right of the table and adding the 'Activity Params' and 'Activity Props' columns.
+
+
+# Please note: we will soon be releasing a beta version of our new ChEMBL web interface. This will be available alongside our current interface for a period of time. Further details will be announced via the blog and mailing list soon.
+
+
+################################################
+# Changes to web services:
+################################################
+
+Web services have been updated to reflect the changes in the ChEMBL_24 schema
+
+
+################################################
+# Changes download files:
+################################################
+
+Oracle 12c exports are now available: ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/chembl_24_oracle12c.tar.gz
+
+Please note: MySQL exports require MySQL version 5.6.24 or higher
+
+
+################################################
+# Changes to RDF format:
+################################################
+
+Due to the fact the NUM_ALERTS column has been removed from the COMPOUND_PROPERTIES table, this property has also been removed from the molecule RDF file.
+
+
+# Funding acknowledgements:
+
+Work contributing to ChEMBL24 was funded by the Wellcome Trust, EMBL Member States, Open Targets, National Institutes of Health (NIH), EU Innovative Medicines Initiative (IMI) and EU Framework 7
+ programmes. Please see https://www.ebi.ac.uk/chembl/funding for more details.
+
+
+If you require further information about ChEMBL, please contact us: chembl-help@ebi.ac.uk
+
+# To receive updates when new versions of ChEMBL are available, please sign up to our mailing list: http://listserver.ebi.ac.uk/mailman/listinfo/chembl-announce
+# For general queries/feedback please email: chembl-help@ebi.ac.uk
+# To report any problems with data content please email: chembl-data@ebi.ac.uk
+# For details of upcoming webinars, please see: http://chembl.blogspot.com/search/label/Webinar
